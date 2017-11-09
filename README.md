@@ -1,5 +1,7 @@
 # astro-animations
 
+![Screenshot](/assets/screenshot.png)
+
 ## Development
 
 ### Start Server
