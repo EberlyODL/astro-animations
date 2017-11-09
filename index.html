@@ -10,10 +10,8 @@
   <body>
     <a-scene>
       <a-assets>
-        <a-asset-item id="bowl-gltf" src="assets/fancy_glass_bowl/scene.gltf"></a-asset-item>
-        <a-asset-item id="glasssphere-gltf" src="assets/glassSphere1.gltf"></a-asset-item>
-        <a-asset-item id="earth-obj" src="assets/earth/earth_obj.obj"></a-asset-item>
-        <a-asset-item id="earth-mtl" src="assets/earth/earth_obj.mtl"></a-asset-item>
+        <a-asset-item id="diskEmbedBuffer" src="assets/diskEmbedBuffer.gltf"></a-asset-item>
+        <a-asset-item id="circleEmbedBuffer" src="assets/circleEmbedBuffer.gltf"></a-asset-item>
         <img id="space-texture" src="https://cdn.glitch.com/af5434bc-c6cd-4215-aa86-d0285a0ef161%2Fouter-space-Texture.jpg?1509635783418">
       </a-assets>
       <!-- Camera + Cursor. -->
@@ -27,14 +25,7 @@
       </a-camera>
       <!-- <a-entity gltf-model="#bowl-gltf" position="0 0 -5" scale=".1 .1 .1"></a-entity> -->
       <!-- <a-entity gltf-model="#glasssphere-gltf" position="10 0 -5"></a-entity> -->
-      <a-entity obj-model="obj: #earth-obj; mtl: #earth-mtl" position="0 1 -10" scale="6 6 6">
-        <a-animation attribute="rotation"
-        dur="100000"
-        fill="none"
-        to="0 360 0"
-        ease="linear"
-        repeat="indefinite"></a-animation>
-      </a-entity>
+      <a-entity gltf-model="#diskEmbedBuffer"> </a-entity>
       <a-sky src="#space-texture"></a-sky>
 
     </a-scene>

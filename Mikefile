@@ -1,0 +1,7 @@
+SHELL := /usr/bin/env bash
+
+start:
+	docker-compose up -d
+
+share:
+  ngrok http 80
