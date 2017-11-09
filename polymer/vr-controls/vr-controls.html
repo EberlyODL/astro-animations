@@ -1,0 +1,43 @@
+<link rel="import" href="../vr-controls-button/vr-controls-button.html">
+
+<dom-module id="vr-controls">
+
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <div id="controls">
+      <content id="slot"></content>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: "vr-controls",
+      properties: {
+        camera: {
+          type: String,
+          value: '',
+          observer: '_cameraChanged'
+        }
+      },
+      _cameraChanged: function (camera, old) {
+        const buttons = this.getContentChildren('#slot');
+        buttons.map((b) => {
+          const bCamera = b.getAttribute('camera');
+          if (bCamera === camera) {
+            b.setAttribute('active', true);
+          }
+          else {
+            b.removeAttribute('active');
+          }
+        })
+      },
+      ready: function () {
+      }
+    });
+  </script>
+
+</dom-module>

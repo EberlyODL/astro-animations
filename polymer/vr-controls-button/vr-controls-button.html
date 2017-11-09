@@ -1,0 +1,44 @@
+
+<dom-module id="vr-controls-button">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      :host lrnsys-button ::shadow paper-button {
+        background: rgba(255,255,255, 0.8);
+      }
+      :host[active] lrnsys-button ::shadow paper-button {
+        background: rgba(37, 216, 78, 1);
+      }
+    </style>
+      <lrnsys-button on-click="_buttonClick" data-camera="[[camera]]" icon="[[icon]]" label="[[label]]"></lrnsys-button>
+  </template>
+  <script>
+    Polymer({
+      is: 'vr-controls-button',
+      properties: {
+        active: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
+        },
+        camera: {
+          type: String,
+          value: ''
+        },
+        icon: {
+          type: String,
+          value: 'image:photo-camera',
+        },
+        label: {
+          type: String,
+          value: ''
+        }
+      },
+      _buttonClick: function(e) {
+        this.fire('camera-change', { camera: this.camera });
+      }
+    });
+  </script>
+</dom-module>

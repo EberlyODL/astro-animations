@@ -3,32 +3,14 @@
   <head>
     <title>Hello, WebVR! - A-Frame</title>
     <meta name="description" content="Hello, WebVR! - A-Frame">
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
     <link rel="assets/styles.css" href="">
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/webcomponents/webcomponentsjs/v0.7.24/webcomponents-lite.min.js"></script>
     <link href="https://cdn.rawgit.com/LRNWebComponents/build/0.2.0/build/default/build.html" rel="import" />
-    <link rel="import" href="polymer/vr-controls.html">
+    <link rel="import" href="/polymer/vr-scene/vr-scene.html">
   </head>
   <body>
-    <a-scene>
-      <a-assets>
-        <a-asset-item id="diskEmbedBuffer" src="assets/diskEmbedBuffer.gltf"></a-asset-item>
-        <a-asset-item id="circleEmbedBuffer" src="assets/circleEmbedBuffer.gltf"></a-asset-item>
-        <img id="space-texture" src="https://cdn.glitch.com/af5434bc-c6cd-4215-aa86-d0285a0ef161%2Fouter-space-Texture.jpg?1509635783418">
-      </a-assets>
-      <!-- Camera1 -->
-      <a-camera id="camera1" camera look-controls="enabled: false" position="-2 2 12" rotation="-16 0 0"></a-camera>
-      <!-- Sphere -->
-      <a-entity id="sphere" look-controls="" gltf-model="assets/diskEmbedBuffer.gltf" material="" position="0 0 -3" rotation="0 0 0">
-        <!-- Camera2 attached to sphere -->
-        <a-camera id="camera2" camera="active:false" look-controls="" position="0 1.6 0" rotation="9 106 0" wasd-controls=""> </a-camera>
-      </a-entity>
-      <!-- Sky -->
-      <a-sky src="#space-texture"></a-sky>
-      <!-- VR Controls -->
-      <vr-controls></vr-controls>
-    </a-scene>
-    <script src="/app.js"></script>
+    <vr-scene></vr-scene>
   </body>
 </html>

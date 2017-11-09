@@ -1,0 +1,87 @@
+<link rel="import" href="../vr-controls/vr-controls.html">
+
+<dom-module id="vr-scene">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      vr-controls {
+        position: absolute;
+        display: block;
+        bottom: 0;
+        left: 0;
+        z-index: 10000;
+      }
+    </style>
+    <a-scene>
+      <a-assets>
+        <a-asset-item id="diskEmbedBuffer" src="/assets/diskEmbedBuffer.gltf"></a-asset-item>
+        <a-asset-item id="circleEmbedBuffer" src="/assets/circleEmbedBuffer.gltf"></a-asset-item>
+        <img id="space-texture" src="https://cdn.glitch.com/af5434bc-c6cd-4215-aa86-d0285a0ef161%2Fouter-space-Texture.jpg?1509635783418">
+      </a-assets>
+      <!-- Camera1 -->
+      <a-camera id="camera1" data-camera="1" camera look-controls="enabled: false" position="-2 2 12" rotation="0 0 0"></a-camera>
+      <!-- Sphere -->
+      <a-entity id="sphere" look-controls="" gltf-model="/assets/diskEmbedBuffer.gltf" material="" position="0 0 -3" rotation="0 0 0">
+        <!-- Camera2 attached to sphere -->
+        <a-camera id="camera2" data-camera="2" camera="active:false" look-controls="" position="0 1.6 0" rotation="0 0 0" wasd-controls="">
+        </a-camera>
+      </a-entity>
+      <!-- Sky -->
+      <a-sky src="#space-texture"></a-sky>
+    </a-scene>
+    <!-- VR Controls -->
+    <vr-controls camera="[[camera]]">
+      <vr-controls-button active label="Camera 1" camera="1"></vr-controls-button>
+      <vr-controls-button label="Camera 2" camera="2"></vr-controls-button>
+    </vr-controls>
+  </template>
+  <script>
+    Polymer({
+      is: 'vr-scene',
+      properties: {
+        camera: {
+          type: String,
+          value: '1',
+          observer: '_cameraChanged'
+        }
+      },
+
+      _cameraChanged: function (camera, old) {
+        var cameraEl = document.querySelector(`#camera${camera}`);
+        if (cameraEl) {
+          cameraEl.setAttribute('camera', 'active', true);
+          if (camera === '1') {
+            cameraEl.setAttribute('look-controls', 'enabled: false');
+            sphere.setAttribute('look-controls', 'enabled: true');
+            this.resetSphereRotation();
+          }
+          if (camera === '2') {
+            cameraEl.setAttribute('look-controls', 'enabled: true');
+            sphere.setAttribute('look-controls', 'enabled: false');
+            this.resetCameraRotation(camera);
+          }
+        }
+      },
+
+      resetSphereRotation: function () {
+        this.$.sphere.setAttribute('rotation', '0 0 0');
+      },
+
+      resetCameraRotation: function (camera) {
+        if (camera) {
+          this.$$(`#camera${camera}`).setAttribute('rotation', ' 0 0 0');
+        }
+      },
+
+      ready: function () {
+        this._cameras = this.querySelectorAll('a-camera');
+        this.addEventListener('camera-change', (e) => {
+          this.camera = e.detail.camera;
+        });
+      }
+    });
+  </script>
+</dom-module>
