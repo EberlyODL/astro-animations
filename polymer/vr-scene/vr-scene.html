@@ -1,4 +1,5 @@
 <link rel="import" href="../vr-controls/vr-controls.html">
+<link rel="import" href="../vr-hud/vr-hud.html">
 
 <dom-module id="vr-scene">
   <template>
@@ -22,11 +23,11 @@
         <img id="space-texture" src="https://cdn.glitch.com/af5434bc-c6cd-4215-aa86-d0285a0ef161%2Fouter-space-Texture.jpg?1509635783418">
       </a-assets>
       <!-- Camera1 -->
-      <a-camera id="camera1" data-camera="1" camera look-controls="enabled: false" position="-2 2 12" rotation="0 0 0"></a-camera>
+      <a-camera id="camera1" data-camera="1" camera look-controls="enabled: false" position="0 0 12" rotation="0 0 0"></a-camera>
       <!-- Sphere -->
       <a-entity id="sphere" look-controls="" gltf-model="/assets/diskEmbedBuffer.gltf" material="" position="0 0 -3" rotation="0 0 0">
         <!-- Camera2 attached to sphere -->
-        <a-camera id="camera2" data-camera="2" camera="active:false" look-controls="" position="0 1.6 0" rotation="0 0 0" wasd-controls="">
+        <a-camera id="camera2" data-camera="2" camera="active:false" look-controls="" position="0 1.6 0" rotation="0 0 0">
         </a-camera>
       </a-entity>
       <!-- Sky -->
@@ -37,6 +38,7 @@
       <vr-controls-button active label="Camera 1" camera="1"></vr-controls-button>
       <vr-controls-button label="Camera 2" camera="2"></vr-controls-button>
     </vr-controls>
+    <vr-hud>[[hud]]</vr-hud>
   </template>
   <script>
     Polymer({
@@ -46,6 +48,11 @@
           type: String,
           value: '1',
           observer: '_cameraChanged'
+        },
+        hud: {
+          type: String,
+          notify: true,
+          value: ''
         }
       },
 
@@ -57,6 +64,7 @@
             cameraEl.setAttribute('look-controls', 'enabled: false');
             sphere.setAttribute('look-controls', 'enabled: true');
             this.resetSphereRotation();
+            this.resetHud();
           }
           if (camera === '2') {
             cameraEl.setAttribute('look-controls', 'enabled: true');
@@ -76,10 +84,38 @@
         }
       },
 
+      resetHud: function () {
+        this.hud = '';
+      },
+
+      _getDirectionFromCoords: function (x, y) {
+        if (y > x) {
+          if (y < 0) {
+            return "North";
+          } else {
+            return "South";
+          }
+        } else {
+          if (x < 0) {
+            return "West";
+          } else {
+            return "East";
+          }
+        }
+      },
+
       ready: function () {
         this._cameras = this.querySelectorAll('a-camera');
         this.addEventListener('camera-change', (e) => {
           this.camera = e.detail.camera;
+        });
+
+        this.$.camera2.addEventListener('componentchanged', (e) => {
+          if (this.camera === '2') {
+            // const rotation = e.target.getAttribute('rotation').map((i) => parseInt(i, 10));
+            const rotation = e.target.getAttribute('rotation');
+            this.hud =  JSON.stringify(this._getDirectionFromCoords(rotation.x, rotation.y));
+          }
         });
       }
     });
