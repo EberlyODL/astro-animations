@@ -6,3 +6,9 @@ services:
       - .:/usr/share/nginx/html
     ports:
       - '80:80'
+  share:
+    image: wernight/ngrok
+    ports:
+      - '4040:4040'
+    links:
+      - 'web'
