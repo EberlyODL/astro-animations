@@ -1,6 +1,14 @@
 <dom-module id="vr-controls">
 
   <template>
+    <style>
+      :host {
+        display: block;
+      }
+      :host lrnsys-button ::shadow paper-button {
+        background: rgba(255,255,255, 0.8);
+      }
+    </style>
     <div id="controls">
       <lrnsys-button data-camera="1" icon="cloud-done" label="Camera1"></lrnsys-button>
       <lrnsys-button data-camera="2" icon="cloud-done" label="Camera2"></lrnsys-button>
@@ -11,7 +19,8 @@
     Polymer({
       is: "vr-controls",
       ready: function () {
-        const controls = this.$.controls;
+        this._sphere = document.querySelector('#sphere');
+        this._controls = this.$.controls;
         controls.addEventListener('click', (e) => {
           const eventNormalized = Polymer.dom(e);
           const target = eventNormalized.localTarget;
@@ -20,6 +29,14 @@
             var cameraEl = document.querySelector(`#camera${camera}`);
             if (cameraEl) {
               cameraEl.setAttribute('camera', 'active', true);
+              if (camera === '1') {
+                cameraEl.setAttribute('look-controls', 'enabled: false');
+                sphere.setAttribute('look-controls', 'enabled: true');
+              }
+              if (camera === '2') {
+                cameraEl.setAttribute('look-controls', 'enabled: true');
+                sphere.setAttribute('look-controls', 'enabled: false');
+              }
             }
           }
         });

@@ -17,24 +17,17 @@
         <a-asset-item id="circleEmbedBuffer" src="assets/circleEmbedBuffer.gltf"></a-asset-item>
         <img id="space-texture" src="https://cdn.glitch.com/af5434bc-c6cd-4215-aa86-d0285a0ef161%2Fouter-space-Texture.jpg?1509635783418">
       </a-assets>
-      <!-- Camera + Cursor. -->
-      <a-camera id="camera1" camera look-controls position="-2 2 12" rotation="-16 0 0"></a-camera>
-
-      <a-camera id="camera2" camera>
-        <a-cursor id="cursor" material="color:orange;shader:flat;">
-          <a-animation begin="click" easing="ease-in" attribute="scale"
-                       fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
-          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
-                       from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
-        </a-cursor>
-      </a-camera>
-      <!-- <a-entity gltf-model="#bowl-gltf" position="0 0 -5" scale=".1 .1 .1"></a-entity> -->
-      <!-- <a-entity gltf-model="#glasssphere-gltf" position="10 0 -5"></a-entity> -->
-      <a-entity gltf-model="#diskEmbedBuffer"> </a-entity>
-      <!-- <a-sky src="#space-texture"></a-sky> -->
-
+      <!-- Camera1 -->
+      <a-camera id="camera1" camera look-controls="enabled: false" position="-2 2 12" rotation="-16 0 0"></a-camera>
+      <!-- Sphere -->
+      <a-entity id="sphere" look-controls="" gltf-model="assets/diskEmbedBuffer.gltf" material="" position="0 0 -3" rotation="0 0 0">
+        <!-- Camera2 attached to sphere -->
+        <a-camera id="camera2" camera="active:false" look-controls="" position="0 1.6 0" rotation="9 106 0" wasd-controls=""> </a-camera>
+      </a-entity>
+      <!-- Sky -->
+      <a-sky src="#space-texture"></a-sky>
+      <!-- VR Controls -->
       <vr-controls></vr-controls>
-
     </a-scene>
     <script src="/app.js"></script>
   </body>
