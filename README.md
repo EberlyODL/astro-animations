@@ -1,6 +1,6 @@
 # astro-animations
 
-## Commands
+## Development
 
 ### Start Server
 
