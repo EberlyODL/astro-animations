@@ -3,9 +3,12 @@
   <head>
     <title>Hello, WebVR! - A-Frame</title>
     <meta name="description" content="Hello, WebVR! - A-Frame">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="assets/styles.css" href="">
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/webcomponents/webcomponentsjs/v0.7.24/webcomponents-lite.min.js"></script>
     <link href="https://cdn.rawgit.com/LRNWebComponents/build/0.2.0/build/default/build.html" rel="import" />
+    <link rel="import" href="polymer/vr-controls.html">
   </head>
   <body>
     <a-scene>
@@ -15,7 +18,9 @@
         <img id="space-texture" src="https://cdn.glitch.com/af5434bc-c6cd-4215-aa86-d0285a0ef161%2Fouter-space-Texture.jpg?1509635783418">
       </a-assets>
       <!-- Camera + Cursor. -->
-      <a-camera>
+      <a-camera id="camera1" camera look-controls position="-2 2 12" rotation="-16 0 0"></a-camera>
+
+      <a-camera id="camera2" camera>
         <a-cursor id="cursor" material="color:orange;shader:flat;">
           <a-animation begin="click" easing="ease-in" attribute="scale"
                        fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="150"></a-animation>
@@ -26,7 +31,9 @@
       <!-- <a-entity gltf-model="#bowl-gltf" position="0 0 -5" scale=".1 .1 .1"></a-entity> -->
       <!-- <a-entity gltf-model="#glasssphere-gltf" position="10 0 -5"></a-entity> -->
       <a-entity gltf-model="#diskEmbedBuffer"> </a-entity>
-      <a-sky src="#space-texture"></a-sky>
+      <!-- <a-sky src="#space-texture"></a-sky> -->
+
+      <vr-controls></vr-controls>
 
     </a-scene>
     <script src="/app.js"></script>

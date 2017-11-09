@@ -1,0 +1,30 @@
+<dom-module id="vr-controls">
+
+  <template>
+    <div id="controls">
+      <lrnsys-button data-camera="1" icon="cloud-done" label="Camera1"></lrnsys-button>
+      <lrnsys-button data-camera="2" icon="cloud-done" label="Camera2"></lrnsys-button>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: "vr-controls",
+      ready: function () {
+        const controls = this.$.controls;
+        controls.addEventListener('click', (e) => {
+          const eventNormalized = Polymer.dom(e);
+          const target = eventNormalized.localTarget;
+          const camera = target.getAttribute('data-camera');
+          if (camera) {
+            var cameraEl = document.querySelector(`#camera${camera}`);
+            if (cameraEl) {
+              cameraEl.setAttribute('camera', 'active', true);
+            }
+          }
+        });
+      }
+    });
+  </script>
+
+</dom-module>
