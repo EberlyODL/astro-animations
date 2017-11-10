@@ -18,14 +18,14 @@
     </style>
     <a-scene>
       <a-assets>
-        <a-asset-item id="diskEmbedBuffer" src="/assets/diskEmbedBuffer.gltf"></a-asset-item>
-        <a-asset-item id="circleEmbedBuffer" src="/assets/circleEmbedBuffer.gltf"></a-asset-item>
+        <a-asset-item id="diskEmbedBuffer" src="../..//assets/diskEmbedBuffer.gltf"></a-asset-item>
+        <a-asset-item id="circleEmbedBuffer" src="../../assets/circleEmbedBuffer.gltf"></a-asset-item>
         <img id="space-texture" src="https://cdn.glitch.com/af5434bc-c6cd-4215-aa86-d0285a0ef161%2Fouter-space-Texture.jpg?1509635783418">
       </a-assets>
       <!-- Camera1 -->
       <a-camera id="camera1" data-camera="1" camera look-controls="enabled: false" position="0 0 12" rotation="0 0 0"></a-camera>
       <!-- Sphere -->
-      <a-entity id="sphere" look-controls="" gltf-model="/assets/diskEmbedBuffer.gltf" material="" position="0 0 -3" rotation="0 0 0">
+      <a-entity id="sphere" look-controls="" gltf-model="../../assets/diskEmbedBuffer.gltf" material="" position="0 0 -3" rotation="0 0 0">
         <!-- Camera2 attached to sphere -->
         <a-camera id="camera2" data-camera="2" camera="active:false" look-controls="" position="0 1.6 0" rotation="0 0 0">
         </a-camera>
