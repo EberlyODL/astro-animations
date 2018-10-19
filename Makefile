@@ -8,3 +8,6 @@ clean:
 
 share:
 	curl $(docker port astroanimations_share_1 4040)/api/tunnels
+
+deploy:
+	surge -d astro-animation.surge.sh .
